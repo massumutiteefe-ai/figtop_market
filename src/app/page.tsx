@@ -1,65 +1,83 @@
-import Image from "next/image";
+'use client';
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import PromoVideo from './components/PromoVideo';
+import PricingSection from './components/PricingSection';
+import FAQSection from './components/FAQSection';
+import TrustAndHowToUse from './components/TrustAndHowToUse'; 
+import Footer from './components/Footer'; // Imports our custom footer grid
+
+const phrases = [
+  "Provides Personalized Audience Targeting",
+  "Provides AI-Generated Video Ad",
+  "Provides Live Tracking of your Investments"
+];
 
 export default function Home() {
+  const [textIndex, setTextIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextIndex((prev) => (prev + 1) % phrases.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="bg-[#0b0f19] min-h-screen text-white overflow-x-hidden relative">
+      <Navbar />
+
+      {/* --- HERO SECTION --- */}
+      <section id="home" className="min-h-screen pt-36 pb-20 flex flex-col items-center justify-center text-center px-6 relative max-w-7xl mx-auto">
+        {/* Floating Circles */}
+        <div className="absolute left-4 top-1/3 w-12 h-12 rounded-full border-2 border-blue-500/30 overflow-hidden hidden md:block shadow-lg animate-float-slow">
+          <img src="https://unsplash.com" alt="User Box 1" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute left-16 bottom-1/4 w-14 h-14 rounded-full border-2 border-indigo-500/30 overflow-hidden hidden md:block shadow-lg animate-float-delayed">
+          <img src="https://unsplash.com" alt="User Box 2" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute right-6 top-1/4 w-14 h-14 rounded-full border-2 border-blue-500/30 overflow-hidden hidden md:block shadow-lg animate-float-slow">
+          <img src="https://unsplash.com" alt="User Box 3" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute right-12 bottom-1/3 w-12 h-12 rounded-full border-2 border-indigo-500/30 overflow-hidden hidden md:block shadow-lg animate-float-delayed">
+          <img src="https://unsplash.com" alt="User Box 4" className="w-full h-full object-cover" />
+        </div>
+
+        <h1 className="text-4xl md:text-6xl font-black max-w-4xl tracking-tight leading-tight text-white mb-2">
+          Digital Figtop AI bot <br />
+          <span className="bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">and stock market</span>
+        </h1>
+
+        <div className="h-16 flex items-center justify-center mb-6">
+          <p className="text-2xl md:text-4xl font-extrabold text-blue-500 transition-all duration-500">
+            {phrases[textIndex]}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+
+        <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8 px-4 border-l-2 border-blue-600/40 bg-blue-950/5 py-2 rounded-r-lg">
+          Digital Figtop is a revolutionary platform that leverages Artificial Intelligence 
+          (AI) to simplify affiliate marketing. It offers AI-powered services for affiliate marketers.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <a href="/auth/register" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-8 py-3.5 rounded-full transition-all shadow-lg transform hover:-translate-y-0.5">
+            Register Now for free
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+          <a href="/auth/login" className="bg-[#111827] border border-gray-800 text-gray-300 hover:text-white font-bold text-sm px-8 py-3.5 rounded-full transition-all hover:bg-gray-800">
+            Login
           </a>
         </div>
+      </section>
+
+      {/* --- STANDARDIZED NON-REPETITIVE SEQUENCE BODY --- */}
+      <main>
+        <PromoVideo />
+        <PricingSection />
+        <FAQSection />       {/* Includes Questions & the updated User Graphic Panel */}
+        <TrustAndHowToUse /> {/* Includes Brand Trust Bar and Onboarding Steps */}
       </main>
+
+      <Footer />            {/* Includes About Us, Privacy, Contact info, and legal links */}
     </div>
   );
 }

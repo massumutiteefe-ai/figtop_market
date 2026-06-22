@@ -1,0 +1,169 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+
+interface ManageExpertProfileProps {
+  isOpen: boolean;
+  onClose: () => void;
+  traderProfile: any;
+  onProfileUpdated: (updatedProfile: any) => void;
+  onProfileDeleted: (id: string) => void;
+}
+
+export default function ManageExpertProfile({
+  isOpen,
+  onClose,
+  traderProfile,
+  onProfileUpdated,
+  onProfileDeleted,
+}: ManageExpertProfileProps) {
+  const [name, setName] = useState(traderProfile?.name || "");
+  const [avatar, setAvatar] = useState(traderProfile?.avatar || "");
+  const [specialty, setSpecialty] = useState(traderProfile?.specialty?.replace(" Specialist", "") || "Crypto");
+  const [verificationRequested, setVerificationRequested] = useState(false);
+
+  useEffect(() => {
+    if (traderProfile && isOpen) {
+      setName(traderProfile.name);
+      setAvatar(traderProfile.avatar);
+      setSpecialty(traderProfile.specialty?.replace(" Specialist", "") || "Crypto");
+      setVerificationRequested(localStorage.getItem(`verify_req_${traderProfile.id}`) === "true");
+    }
+  }, [traderProfile, isOpen]);
+
+  if (!isOpen || !traderProfile) return null;
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => setAvatar(reader.result as string);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    if (!name.trim()) return alert("Name cannot be empty!");
+
+    const updatedProfile = {
+      ...traderProfile,
+      name: name,
+      avatar: avatar,
+      specialty: `${specialty} Specialist`,
+    };
+
+    const localDbRaw = localStorage.getItem("local_expert_profiles");
+    if (localDbRaw) {
+      let existingList = JSON.parse(localDbRaw);
+      existingList = existingList.map((item: any) => (item.id === traderProfile.id ? updatedProfile : item));
+      localStorage.setItem("local_expert_profiles", JSON.stringify(existingList));
+    }
+
+    onProfileUpdated(updatedProfile);
+    alert("Profile settings modified successfully!");
+    onClose();
+  };
+
+  const handleRequestVerification = () => {
+    localStorage.setItem(`verify_req_${traderProfile.id}`, "true");
+    setVerificationRequested(true);
+    alert("Verification request submitted successfully to the administration log pipelines.");
+  };
+
+  const handleDeleteProfile = () => {
+    if (confirm("Are you absolutely sure you want to permanently delete your Expert Trader profile? This action is irreversible.")) {
+      const localDbRaw = localStorage.getItem("local_expert_profiles");
+      if (localDbRaw) {
+        let existingList = JSON.parse(localDbRaw);
+        existingList = existingList.filter((item: any) => item.id !== traderProfile.id);
+        localStorage.setItem("local_expert_profiles", JSON.stringify(existingList));
+      }
+      localStorage.removeItem(`verify_req_${traderProfile.id}`);
+      onProfileDeleted(traderProfile.id);
+      onClose();
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 select-none">
+      <div className="w-full max-w-md bg-[#16181f] border border-gray-800 rounded-2xl p-6 shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-white text-sm">✕</button>
+
+        <h3 className="text-lg font-bold text-white mb-1">Manage Trading Page</h3>
+        <p className="text-xs text-gray-400 mb-6">Modify branding metadata options or apply for structural verification status markers.</p>
+
+        <div className="space-y-4">
+          <div className="text-center">
+            <div className="w-20 h-20 bg-gray-900 border border-gray-800 rounded-full mx-auto flex items-center justify-center overflow-hidden mb-3">
+              {avatar.startsWith("data:image") ? (
+                <img src={avatar} alt="Preview" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-2xl">{avatar}</span>
+              )}
+            </div>
+            <input type="file" accept="image/*" onChange={handleImageUpload} className="text-[10px] text-gray-500 block mx-auto cursor-pointer" />
+          </div>
+
+          <div>
+            <label className="block text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-1">Display Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-[#12131a] border border-gray-800 focus:border-blue-500 text-xs p-2.5 rounded-lg text-white outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-1">Market Category Specialty Focus</label>
+            <select
+              value={specialty}
+              onChange={(e) => setSpecialty(e.target.value)}
+              className="w-full bg-[#12131a] border border-gray-800 focus:border-blue-500 text-xs p-2.5 rounded-lg text-white outline-none"
+            >
+              <option value="Crypto">Crypto</option>
+              <option value="Forex">Forex</option>
+              <option value="Index">Index</option>
+              <option value="Stocks">Stocks</option>
+            </select>
+          </div>
+
+          <div className="flex gap-2 pt-2">
+            <button
+              onClick={handleSaveChanges}
+              className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-xl text-xs font-semibold transition"
+            >
+              Save Changes
+            </button>
+
+            {traderProfile.isVerified ? (
+              <span className="flex-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-center py-2.5 rounded-xl text-xs font-bold select-none">
+                ✓ Account Verified
+              </span>
+            ) : verificationRequested ? (
+              <span className="flex-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-center py-2.5 rounded-xl text-xs font-bold select-none">
+                Pending Verification
+              </span>
+            ) : (
+              <button
+                onClick={handleRequestVerification}
+                className="flex-1 bg-amber-600 hover:bg-amber-500 text-white py-2.5 rounded-xl text-xs font-semibold transition"
+              >
+                Apply for Blue Tick
+              </button>
+            )}
+          </div>
+
+          <div className="border-t border-gray-800/80 pt-4 mt-2">
+            <button
+              onClick={handleDeleteProfile}
+              className="w-full bg-rose-950/20 hover:bg-rose-900/30 border border-rose-900/40 text-rose-400 py-2.5 rounded-xl text-xs font-bold transition"
+            >
+              Delete Expert Page Portfolio
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
