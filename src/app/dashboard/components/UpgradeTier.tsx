@@ -26,7 +26,7 @@ export default function UpgradeTier() {
       setClientId(sessionToken);
       
       const fetchCurrentBalance = () => {
-        fetch(`http://localhost/figtop-api/get_client_dashboard.php?client_id=${sessionToken}`)
+        fetch(`https://free.nfget_client_dashboard.php?client_id=${sessionToken}`)
           .then((res) => res.json())
           .then((data) => {
             if (data?.balances?.total_balance) {
@@ -112,7 +112,7 @@ export default function UpgradeTier() {
       const updatedTotalBalance = liveBalance - tier.cost;
 
       // Synchronize changes to your central PHP server sql databases securely
-      const response = await fetch("http://localhost/figtop-api/db.php", {
+      const response = await fetch("https://free.nfdb.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

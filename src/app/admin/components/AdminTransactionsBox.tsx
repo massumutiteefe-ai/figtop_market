@@ -21,7 +21,7 @@ export default function AdminTransactionsBox() {
   const [activeVoucherImage, setActiveVoucherImage] = useState<string | null>(null);
 
   const fetchTransactions = () => {
-    fetch("http://localhost/figtop-api/get_admin_transaction.php")
+    fetch("https://free.nfget_admin_transaction.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

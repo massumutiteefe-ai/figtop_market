@@ -22,7 +22,7 @@ export default function WithdrawalManager() {
   // 1. Retrieve dynamic rows from your central database entry parser log API
   const fetchPendingWithdrawals = async () => {
     try {
-      const res = await fetch("http://localhost/figtop-api/get_admin_transaction.php");
+      const res = await fetch("https://free.nfget_admin_transaction.php");
       const data = await res.json();
       if (data.success) {
         // Isolate entries that represent unconfirmed, incoming payout requests
@@ -50,7 +50,7 @@ export default function WithdrawalManager() {
     if (!selectedWith) return;
 
     try {
-      const res = await fetch("http://localhost/figtop-api/process_admin_action.php", {
+      const res = await fetch("https://free.nfprocess_admin_action.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

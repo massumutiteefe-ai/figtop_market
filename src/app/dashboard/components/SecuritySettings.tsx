@@ -28,7 +28,7 @@ export default function SecuritySettings({ profile }: SecuritySettingsProps) {
   const handleUpdateProfile = async () => {
     setIsUpdating(true);
     try {
-      const res = await fetch("http://localhost/figtop-api/update_profile_settings.php", {
+      const res = await fetch("https://free.nfupdate_profile_settings.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -48,7 +48,7 @@ export default function SecuritySettings({ profile }: SecuritySettingsProps) {
   const handleChangePassword = async () => {
     if (!password.trim()) return alert("Password cannot be blank.");
     try {
-      const res = await fetch("http://localhost/figtop-api/update_profile_settings.php", {
+      const res = await fetch("https://free.nfupdate_profile_settings.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

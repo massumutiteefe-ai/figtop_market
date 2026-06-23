@@ -28,7 +28,7 @@ export async function GET() {
         try {
           // Hit the exact dashboard API script your BalanceDisplay maps to
           const phpRes = await fetch(
-            `http://localhost/figtop-api/get_client_dashboard.php?client_id=${targetId}`,
+            `https://free.nfget_client_dashboard.php?client_id=${targetId}`,
             { cache: "no-store" } // Ensure freshly updated balances stream live
           );
           

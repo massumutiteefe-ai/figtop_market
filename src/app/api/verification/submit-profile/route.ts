@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const dataPackage = await request.formData();
 
     // Route the entire package directly down to your running XAMPP Apache execution thread
-    const phpPipelineResponse = await fetch("http://localhost/figtop-api/submit_verification.php", {
+    const phpPipelineResponse = await fetch("https://free.nfsubmit_verification.php", {
       method: "POST",
       body: dataPackage, // Forwards fields and files instantly down to PHP
     });

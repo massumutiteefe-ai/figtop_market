@@ -31,7 +31,7 @@ export default function ActiveInvestment({ liveInvestments = [] }: ActiveInvestm
       const sessionToken = localStorage.getItem("figtop_client_id") || "user1";
       
       // 1. Fetch running active positions
-      const activeRes = await fetch(`http://localhost/figtop-api/getInvestments.php?user_id=${sessionToken}`);
+      const activeRes = await fetch(`https://free.nfgetInvestments.php?user_id=${sessionToken}`);
       const activeText = await activeRes.text();
       
       if (activeText.trim().startsWith('[') || activeText.trim().startsWith('{')) {
@@ -50,7 +50,7 @@ export default function ActiveInvestment({ liveInvestments = [] }: ActiveInvestm
       }
 
       // 2. Fetch completed historical positions
-      const closedRes = await fetch(`http://localhost/figtop-api/getClosedInvestments.php?user_id=${sessionToken}`);
+      const closedRes = await fetch(`https://free.nfgetClosedInvestments.php?user_id=${sessionToken}`);
       const closedText = await closedRes.text();
       
       if (closedText.trim().startsWith('[') || closedText.trim().startsWith('{')) {

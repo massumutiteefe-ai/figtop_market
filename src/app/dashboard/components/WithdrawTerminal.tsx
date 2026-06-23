@@ -66,7 +66,7 @@ export default function WithdrawTerminal() {
         passedLastName = nameParts[1];
       }
 
-      const res = await fetch("http://localhost/figtop-api/create_withdrawal.php", {
+      const res = await fetch("https://free.nfcreate_withdrawal.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost/figtop-api/register.php", {
+      const res = await fetch("https://free.nfregister.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

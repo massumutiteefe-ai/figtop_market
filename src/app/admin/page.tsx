@@ -41,7 +41,7 @@ export default function ModularAdminDashboard() {
 
   const markMessagesAsRead = async () => {
     try {
-      await fetch("http://localhost/figtop-api/db.php", {
+      await fetch("https://free.nfdb.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

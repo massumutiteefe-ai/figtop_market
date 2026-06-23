@@ -47,7 +47,7 @@ export default function ClientDashboard() {
     }
     setClientId(sessionToken);
 
-    fetch(`http://localhost/figtop-api/get_client_dashboard.php?client_id=${sessionToken}`)
+    fetch(`https://free.nfget_client_dashboard.php?client_id=${sessionToken}`)
       .then((res) => res.json())
       .then((data) => {
         setDbData(data);
@@ -61,7 +61,7 @@ export default function ClientDashboard() {
 
   const refreshData = () => {
     if (!clientId) return;
-    fetch(`http://localhost/figtop-api/get_client_dashboard.php?client_id=${clientId}`)
+    fetch(`https://free.nfget_client_dashboard.php?client_id=${clientId}`)
       .then((res) => res.json())
       .then((data) => setDbData(data))
       .catch((err) => console.error(err));
