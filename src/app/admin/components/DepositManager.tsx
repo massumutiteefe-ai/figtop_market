@@ -22,7 +22,7 @@ export default function DepositManager() {
   // 1. Fetch live pending rows from your existing admin transaction endpoint
   const fetchPendingDeposits = async () => {
     try {
-      const res = await fetch("https://free.nfget_admin_transaction.php");
+      const res = await fetch("https://onrender.comget_admin_transaction.php");
       const data = await res.json();
       if (data.success) {
         // Filter out withdrawals and completed transactions; only show pending deposits
@@ -50,7 +50,7 @@ export default function DepositManager() {
     if (!selectedDep) return;
 
     try {
-      const res = await fetch("https://free.nfprocess_admin_action.php", {
+      const res = await fetch("https://onrender.comprocess_admin_action.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

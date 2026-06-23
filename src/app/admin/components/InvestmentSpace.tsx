@@ -22,7 +22,7 @@ export default function InvestmentSpace() {
 
   const loadPositions = async () => {
     try {
-      const res = await fetch('https://free.nfadmin_get_positions.php');
+      const res = await fetch('https://onrender.comadmin_get_positions.php');
       const data = await res.json();
       if (Array.isArray(data)) {
         setPositions(data);
@@ -55,7 +55,7 @@ export default function InvestmentSpace() {
       formData.append("position_id", selectedAudit.id.toString());
       formData.append("percent", percentInput);
 
-      const res = await fetch('https://free.nfadmin_modify_trade.php', { method: "POST", body: formData });
+      const res = await fetch('https://onrender.comadmin_modify_trade.php', { method: "POST", body: formData });
       const r = await res.json();
       if (r.status === "success") {
         alert("Outcome percentage yield override committed successfully!");
@@ -77,7 +77,7 @@ export default function InvestmentSpace() {
       formData.append("position_id", selectedAudit.id.toString());
       formData.append("reduce_amount", partialCloseInput);
 
-      const res = await fetch('https://free.nfadmin_modify_trade.php', { method: "POST", body: formData });
+      const res = await fetch('https://onrender.comadmin_modify_trade.php', { method: "POST", body: formData });
       const r = await res.json();
       if (r.status === "success") {
         alert(`Successfully executed partial close: Deducted $${partialCloseInput} from position principal.`);
@@ -97,7 +97,7 @@ export default function InvestmentSpace() {
       formData.append("position_id", selectedAudit.id.toString());
       formData.append("payout_amount", fullClosePayout);
 
-      const res = await fetch('https://free.nfadmin_modify_trade.php', { method: "POST", body: formData });
+      const res = await fetch('https://onrender.comadmin_modify_trade.php', { method: "POST", body: formData });
       const r = await res.json();
       if (r.status === "success") {
         alert(`Position contract closed safely. Payout amount of $${fullClosePayout} has been registered.`);

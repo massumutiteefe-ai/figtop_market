@@ -45,7 +45,7 @@ export default function SupportChat() {
   const loadMyChatHistory = async () => {
     if (!clientId) return;
     try {
-      const res = await fetch(`https://free.nfwhatsapp_chat.php?client_id=${encodeURIComponent(clientId)}`);
+      const res = await fetch(`https://onrender.comwhatsapp_chat.php?client_id=${encodeURIComponent(clientId)}`);
       const data = await res.json();
       if (data.success) setMessages(data.history);
     } catch (e) { 
@@ -69,7 +69,7 @@ export default function SupportChat() {
   const pushMessagePayload = async (content: string) => {
     if (!clientId) return;
     try {
-      await fetch("https://free.nfwhatsapp_chat.php", {
+      await fetch("https://onrender.comwhatsapp_chat.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ client_id: clientId, surname, sender: "client", message_text: content }),

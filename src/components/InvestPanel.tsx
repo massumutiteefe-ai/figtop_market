@@ -24,7 +24,7 @@ export default function InvestPanel() {
       setClientId(sessionToken);
       
       const fetchCurrentBalance = () => {
-        fetch(`https://free.nfget_client_dashboard.php?client_id=${sessionToken}`)
+        fetch(`https://onrender.comget_client_dashboard.php?client_id=${sessionToken}`)
           .then((res) => res.json())
           .then((data) => {
             if (data?.balances?.total_balance) {
@@ -87,7 +87,7 @@ export default function InvestPanel() {
         const updatedTotalBalance = liveBalance - inputAmount;
 
         // 2. Network Sync: Post data package down your live PHP server database tracking lanes
-        const response = await fetch("https://free.nfdb.php", {
+        const response = await fetch("https://onrender.comdb.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

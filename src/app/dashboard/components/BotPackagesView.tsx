@@ -26,7 +26,7 @@ export default function BotPackagesView({ apiEndpoint }: BotProps) {
       setClientId(sessionToken);
       
       const fetchCurrentBalance = () => {
-        fetch(`https://free.nfget_client_dashboard.php?client_id=${sessionToken}`)
+        fetch(`https://onrender.comget_client_dashboard.php?client_id=${sessionToken}`)
           .then((res) => res.json())
           .then((data) => {
             if (data?.balances?.total_balance) {
@@ -88,7 +88,7 @@ export default function BotPackagesView({ apiEndpoint }: BotProps) {
         const updatedTotalBalance = liveBalance - inputAmount;
 
         // Secure state pipeline submission payload to back-end PHP endpoints
-        const response = await fetch("https://free.nfdb.php", {
+        const response = await fetch("https://onrender.comdb.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

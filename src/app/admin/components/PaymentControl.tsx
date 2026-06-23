@@ -28,7 +28,7 @@ export default function PaymentControl() {
   // Fetch initial payment values from the XAMPP database configuration
   useEffect(() => {
     if (isOpen) {
-      fetch("https://free.nfget_payment_settings.php")
+      fetch("https://onrender.comget_payment_settings.php")
         .then((res) => res.json())
         .then((data) => { if (data) setForm(data); })
         .catch((err) => console.error("Database reading error:", err));
@@ -38,7 +38,7 @@ export default function PaymentControl() {
   const saveSetting = async (key: string) => {
     setSavingKey(key);
     try {
-      const res = await fetch("https://free.nfupdate_payment_settings.php", {
+      const res = await fetch("https://onrender.comupdate_payment_settings.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ setting_key: key, setting_value: form[key] })

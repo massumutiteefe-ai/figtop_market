@@ -11,7 +11,7 @@ export default function ClientPushNotifier() {
     const activeSessionToken = localStorage.getItem("figtop_client_id") || "USR-001";
 
     const checkNotifications = () => {
-      fetch(`https://free.nfget_unread_notifications.php?client_id=${activeSessionToken}&role=client`)
+      fetch(`https://onrender.comget_unread_notifications.php?client_id=${activeSessionToken}&role=client`)
         .then((res) => res.json())
         .then((alerts) => {
           if (alerts && alerts.length > 0) {
@@ -23,7 +23,7 @@ export default function ClientPushNotifier() {
               setShownAlerts((prev) => [...prev, latest.id]);
               
               // Force database flag read confirmations to stop infinite pumping loops
-              fetch("https://free.nfclear_notifications.php", {
+              fetch("https://onrender.comclear_notifications.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ client_id: activeSessionToken })

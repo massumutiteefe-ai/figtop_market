@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("https://free.nfregister.php", {
+      const res = await fetch("https://onrender.comregister.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

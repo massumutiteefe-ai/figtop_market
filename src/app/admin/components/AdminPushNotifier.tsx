@@ -38,7 +38,7 @@ export default function AdminPushNotifier({ onNavigateToTab }: AdminPushNotifier
 
   const checkUnreadAlertsPipe = async () => {
     try {
-      const res = await fetch("https://free.nfnotifications.php");
+      const res = await fetch("https://onrender.comnotifications.php");
       const data = await res.json();
       if (data.success && data.alerts && data.alerts.length > 0) {
         setActiveAlerts((prev) => [...prev, ...data.alerts]);

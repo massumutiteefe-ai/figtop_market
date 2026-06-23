@@ -28,7 +28,7 @@ export async function GET() {
         try {
           // Hit the exact dashboard API script your BalanceDisplay maps to
           const phpRes = await fetch(
-            `https://free.nfget_client_dashboard.php?client_id=${targetId}`,
+            `https://onrender.comget_client_dashboard.php?client_id=${targetId}`,
             { cache: "no-store" } // Ensure freshly updated balances stream live
           );
           

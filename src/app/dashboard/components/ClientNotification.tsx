@@ -8,7 +8,7 @@ export default function ClientNotification() {
 
   useEffect(() => {
     const fetchUnreadAlert = () => {
-      fetch("https://free.nfget_unread_notifications.php?client_id=USR-001&role=client")
+      fetch("https://onrender.comget_unread_notifications.php?client_id=USR-001&role=client")
         .then((res) => res.json())
         .then((alerts) => {
           if (alerts && alerts.length > 0) {

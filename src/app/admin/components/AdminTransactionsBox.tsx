@@ -21,7 +21,7 @@ export default function AdminTransactionsBox() {
   const [activeVoucherImage, setActiveVoucherImage] = useState<string | null>(null);
 
   const fetchTransactions = () => {
-    fetch("https://free.nfget_admin_transaction.php")
+    fetch("https://onrender.comget_admin_transaction.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

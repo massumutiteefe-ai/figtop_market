@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("https://free.nflogin.php", {
+      const res = await fetch("https://onrender.comlogin.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

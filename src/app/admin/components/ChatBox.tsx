@@ -27,7 +27,7 @@ export default function ChatBox() {
 
   const loadThreads = async () => {
     try {
-      const res = await fetch("https://free.nfwhatsapp_chat.php?action=get_threads");
+      const res = await fetch("https://onrender.comwhatsapp_chat.php?action=get_threads");
       const data = await res.json();
       if (data.success) {
         setThreads(data.threads);
@@ -42,7 +42,7 @@ export default function ChatBox() {
   const loadActiveChatLogs = async () => {
     if (!activeId) return;
     try {
-      const res = await fetch(`https://free.nfwhatsapp_chat.php?client_id=${activeId}`);
+      const res = await fetch(`https://onrender.comwhatsapp_chat.php?client_id=${activeId}`);
       const data = await res.json();
       if (data.success) setMessages(data.history);
     } catch (e) { console.error(e); }
@@ -52,7 +52,7 @@ export default function ChatBox() {
     e.stopPropagation();
     if (!confirm("Permanently clear this client's chat logs?")) return;
     try {
-      const res = await fetch("https://free.nfchat_controls.php", {
+      const res = await fetch("https://onrender.comchat_controls.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "delete_chat", client_id: clientId }),
@@ -88,7 +88,7 @@ export default function ChatBox() {
   const executeMessageDispatch = async (contentString: string) => {
     if (!activeId) return;
     try {
-      await fetch("https://free.nfwhatsapp_chat.php", {
+      await fetch("https://onrender.comwhatsapp_chat.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ client_id: activeId, surname: activeSurname, sender: "admin", message_text: contentString }),

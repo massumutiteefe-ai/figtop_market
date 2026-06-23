@@ -41,7 +41,7 @@ export default function ModularAdminDashboard() {
 
   const markMessagesAsRead = async () => {
     try {
-      await fetch("https://free.nfdb.php", {
+      await fetch("https://onrender.comdb.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

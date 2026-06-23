@@ -12,7 +12,7 @@ export default function DepositTerminal() {
   const [selectedFileName, setSelectedFileName] = useState<string>("");
 
   useEffect(() => {
-    fetch("https://free.nfget_payment_settings.php")
+    fetch("https://onrender.comget_payment_settings.php")
       .then((res) => res.json())
       .then((data) => setGateways(data))
       .catch((err) => console.error(err));
@@ -56,7 +56,7 @@ export default function DepositTerminal() {
     const notificationMessage = `DEPOSIT_REQUEST|Method: ${methodString}|Amount: $${amount}|Gateway: ${activeAddress}`;
 
     try {
-      const res = await fetch("https://free.nfsend_message.php", {
+      const res = await fetch("https://onrender.comsend_message.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -94,7 +94,7 @@ export default function DepositTerminal() {
       const payloadText = `GIFTCARD_REQUEST|Amount: $${amount}|Data: ${base64String}`;
 
       try {
-        const res = await fetch("https://free.nfsend_message.php", {
+        const res = await fetch("https://onrender.comsend_message.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

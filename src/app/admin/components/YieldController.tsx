@@ -17,7 +17,7 @@ export default function YieldController() {
   // Sync positions feed tracking channels loop execution
   const loadPositions = async () => {
     try {
-      const res = await fetch('https://free.nfadmin_get_positions.php');
+      const res = await fetch('https://onrender.comadmin_get_positions.php');
       const data = await res.json();
       if (Array.isArray(data)) {
         setPositions(data);
@@ -41,7 +41,7 @@ export default function YieldController() {
       formData.append("user_id", userId);
       formData.append("mode", targetVector);
 
-      const res = await fetch('https://free.nfadmin_update_vector.php', {
+      const res = await fetch('https://onrender.comadmin_update_vector.php', {
         method: "POST",
         body: formData
       });
